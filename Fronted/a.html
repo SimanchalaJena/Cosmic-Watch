@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Watch | Asteroid Risk Tracker</title>
+    <link rel="stylesheet" href="front.css">
+    <!-- Link to FontAwesome for Space Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+</head>
+<body>
+
+    <!-- Main Navigation / Header -->
+    <header class="main-header">
+        <div class="logo">
+            <i class="fas fa-meteor"></i> COSMIC WATCH
+        </div>
+        <nav id="auth-status">
+            <span>Welcome, Researcher</span>
+            <button class="logout-btn">Logout</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- SECTION 1: AUTHENTICATION (Problem Statement Requirement) -->
+        <div class="section auth-section" id="auth-container">
+            <h2><i class="fas fa-user-shield"></i> User Authentication</h2>
+            <div class="tab-container">
+                <form id="loginForm" class="active">
+                    <h3>Login to Access Watchlist</h3>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Username" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Authenticate</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SECTION 2: REAL-TIME DATA FEED (NASA NeoWs API Integration) -->
+        <div class="section dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-satellite-dish"></i> Live Near-Earth Objects (NEOs)</h2>
+                <p class="subtitle">Direct data stream from [NASA's NeoWs API](https://api.nasa.gov)</p>
+            </div>
+            
+            <!-- Filter Bar for Risk Analysis -->
+            <div class="filter-bar">
+                <span class="status-indicator">
+                    <i class="fas fa-circle-dot pulse"></i> Live Feed
+                </span>
+                <select id="risk-filter">
+                    <option value="all">All Objects</option>
+                    <option value="hazardous">Potentially Hazardous</option>
+                    <option value="safe">Safe Passages</option>
+                </select>
+            </div>
+
+            <!-- This is where the JS will inject dynamic asteroid cards -->
+            <div id="live-feed" class="asteroid-grid">
+                <div class="loader">
+                    <i class="fas fa-spinner fa-spin"></i> 
+                    <p>Scanning Deep Space Trajectories...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: WATCHLIST & ALERTS (Personalization Requirement) -->
+        <div class="section watchlist-section">
+            <h2><i class="fas fa-eye"></i> Personal Watchlist</h2>
+            <p class="desc">Save high-risk asteroids here to set custom proximity alerts.</p>
+            
+            <form id="asteroidForm" class="add-to-watch">
+                <input type="text" id="asteroidInput" placeholder="Enter Asteroid Name or ID (e.g., 99942 Apophis)..." required>
+                <button type="submit" class="btn-secondary">Save to Database</button>
+            </form>
+
+            <ul id="asteroidList" class="watchlist-items">
+                <!-- Sample dynamic item -->
+                <li class="watchlist-item">
+                    <span>99942 Apophis (2004 MN4)</span>
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECTION 4: RISK ANALYSIS ENGINE EXPLANATION -->
+        <div class="section info-section">
+            <h3><i class="fas fa-chart-line"></i> Risk Assessment Logic</h3>
+            <p>Our Risk Engine categorizes objects based on <strong>Absolute Magnitude</strong>, <strong>Miss Distance</strong>, and <strong>Relative Velocity</strong>. Data is updated every 24 hours.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer for Hackathon Compliance -->
+    <footer class="footer">
+        <p>© 2023 Cosmic Watch | Built for Interstellar Tracker Hackathon</p>
+        <p>Verified Source: [NASA Planetary Defense Coordination Office](https://www.nasa.gov)</p>
+    </footer>
+
+    <!-- JavaScript Link -->
+    <script src="app.js"></script>
+</body>
+</html>

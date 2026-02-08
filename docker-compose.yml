@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  database:
+    image: mongo:latest
+    container_name: cosmic-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # 2. Backend Service
+  backend:
+    build: ./BACKEND
+    container_name: cosmic-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    environment:
+      - MONGO_URI=mongodb://database:27017/cosmic_watch
+      - NASA_API_KEY=${v5ax3OT06DN0Qs0dOgts8m7TwW6ISDUPVnTTSfxk}
+
+  # 3. Frontend Service
+  frontend:
+    build: ./Fronted
+    container_name: cosmic-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
